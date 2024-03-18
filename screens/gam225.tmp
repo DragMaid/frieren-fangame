@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://drrkmjw40ec30"]
+
+[ext_resource type="Script" path="res://screens/game_screen.gd" id="1_5qvvp"]
+[ext_resource type="PackedScene" uid="uid://or6hnoqwv6y" path="res://spells/zoltraak.tscn" id="2_toerf"]
+[ext_resource type="PackedScene" uid="uid://djbqkmkg1rsxh" path="res://player/frieren.tscn" id="3_367ri"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bgbg"]
+size = Vector2(1150.5, 121)
+
+[node name="game_screen" type="Node2D"]
+script = ExtResource("1_5qvvp")
+zoltraak_scene = ExtResource("2_toerf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(574.25, 587.5)
+shape = SubResource("RectangleShape2D_1bgbg")
+
+[node name="Panel" type="Panel" parent="."]
+offset_top = 528.0
+offset_right = 1150.0
+offset_bottom = 650.0
+
+[node name="Frieren" parent="." instance=ExtResource("3_367ri")]
+position = Vector2(456, 496)

@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://drrkmjw40ec30"]
+
+[ext_resource type="Script" path="res://screens/game_screen.gd" id="1_5qvvp"]
+[ext_resource type="PackedScene" uid="uid://or6hnoqwv6y" path="res://spells/zoltraak.tscn" id="2_toerf"]
+[ext_resource type="PackedScene" uid="uid://djbqkmkg1rsxh" path="res://player/frieren.tscn" id="3_367ri"]
+[ext_resource type="PackedScene" uid="uid://b4okrfikvqqve" path="res://hud/game_hud.tscn" id="4_7w7j7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bgbg"]
+size = Vector2(715, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xn8sn"]
+size = Vector2(13.25, 232)
+
+[node name="game_screen" type="Node2D"]
+script = ExtResource("1_5qvvp")
+zoltraak_scene = ExtResource("2_toerf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(454.5, 535.5)
+shape = SubResource("RectangleShape2D_1bgbg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(103, 412)
+shape = SubResource("RectangleShape2D_xn8sn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(804, 411)
+shape = SubResource("RectangleShape2D_xn8sn")
+
+[node name="Frieren" parent="." instance=ExtResource("3_367ri")]
+position = Vector2(417, 498)
+
+[node name="game_hud" parent="." instance=ExtResource("4_7w7j7")]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 102.0
+offset_top = 528.0
+offset_right = 816.0
+offset_bottom = 568.0
+
+[connection signal="player_damaged" from="Frieren" to="." method="_on_frieren_player_damaged"]

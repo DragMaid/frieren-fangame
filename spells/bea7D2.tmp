@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://lxd7pv0k5r58"]
+
+[ext_resource type="Script" path="res://spells/beam.gd" id="1_1utqc"]
+[ext_resource type="Texture2D" uid="uid://bxv4y1tkqdkjn" path="res://sprite/particles/bubble_particle.png" id="2_yafpd"]
+
+[sub_resource type="Gradient" id="Gradient_8jamp"]
+offsets = PackedFloat32Array(0.00892857, 0.767857, 0.946429, 0.991071, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.925325, 0.925325, 0.925325, 1, 0.589286, 0.589286, 0.589286, 1, 0.875683, 0.875683, 0.875683, 1, 1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wijrx"]
+
+[sub_resource type="Gradient" id="1"]
+offsets = PackedFloat32Array(0.582915, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="2"]
+gradient = SubResource("1")
+
+[sub_resource type="Curve" id="3"]
+_data = [Vector2(0.518072, 1), 0.0, -3.53434, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="4"]
+curve = SubResource("3")
+
+[sub_resource type="ParticleProcessMaterial" id="5"]
+initial_velocity_min = 120.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("4")
+color_ramp = SubResource("2")
+
+[sub_resource type="ParticleProcessMaterial" id="9"]
+spread = 60.0
+initial_velocity_min = 250.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("4")
+color_ramp = SubResource("2")
+
+[sub_resource type="Curve" id="6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.503614, 0.957505), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="zoltraak" type="Node2D"]
+position = Vector2(239, 218)
+script = ExtResource("1_1utqc")
+
+[node name="FillLine2D" type="Line2D" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+points = PackedVector2Array(0, 0, 69.2635, 0)
+width = 12.0
+gradient = SubResource("Gradient_8jamp")
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 8.0
+antialiased = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FillLine2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FillLine2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_wijrx")
+debug_color = Color(1, 0, 0.0823529, 0.419608)
+
+[node name="CastingParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+show_behind_parent = true
+z_index = 1
+emitting = false
+process_material = SubResource("5")
+texture = ExtResource("2_yafpd")
+lifetime = 0.3
+visibility_rect = Rect2(0, -18.722, 29.6756, 38.4841)
+
+[node name="CollisionParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+show_behind_parent = true
+z_index = 1
+emitting = false
+amount = 16
+process_material = SubResource("9")
+texture = ExtResource("2_yafpd")
+lifetime = 0.3
+visibility_rect = Rect2(-2500, -2500, 5000, 5000)
+
+[node name="BeamParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+emitting = false
+amount = 50
+lifetime = 0.5
+preprocess = 1.0
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("2_yafpd")
+emission_shape = 3
+emission_rect_extents = Vector2(60, 20)
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 120.0
+initial_velocity_max = 120.0
+scale_amount_curve = SubResource("6")

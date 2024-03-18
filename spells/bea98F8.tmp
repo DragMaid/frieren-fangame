@@ -1,0 +1,52 @@
+extends Node2D
+
+# Speed at which the laser extends when first fired, in pixels per seconds.
+var cast_speed = 7000.0
+# Maximum length of the laser in pixels.
+var max_length = 5000.0
+# Base duration of the tween animation in seconds.
+var disappear_time = 0.3
+
+@onready var fill := $FillLine2D
+@onready var casting_particles := $CastingParticles2D
+@onready var collision_particles := $CollisionParticles2D
+@onready var beam_particles := $BeamParticles2D
+@onready var line_width: float = fill.width
+@onready var collision_area := $Area2D
+
+func _ready() -> void:
+	set_physics_process(false)
+	fill.points[1] = Vector2.ZERO
+
+#func _unhandled_input(event):
+	#if event is InputEventMouseButton:
+		#fire_beam(get_global_mouse_position())
+		
+func fire_beam(direction: Vector2) -> void:
+	look_at(direction)
+	set_physics_process(true)
+	toggle_particles(true)
+
+func toggle_particles(state: bool) -> void:
+	#beam_particles.emitting = state
+	casting_particles.emitting = state
+	
+func _physics_process(delta: float) -> void:
+	collision_area.get_node("CollisionShape2D").shape.extents += Vector2(cast_speed * delta, 0.0) 
+	fill.points[1] += Vector2(cast_speed * delta, 0.0)
+
+func _on_area_2d_body_entered(body):
+	set_physics_process(false)
+	collision_particles.position = fill.points[1]
+	collision_particles.process_material.direction = Vector3(
+		 fill.points[1].x*-1,  fill.points[1].y*-1, 0
+	)
+	collision_particles.emitting = true
+	collision_area.get_node("CollisionShape2D").disabled = true
+	disappear()
+
+func disappear():
+	var tween = get_tree().create_tween()
+	tween.tween_property(fill, "width", 0, disappear_time)
+	tween.tween_callback(self.queue_free)
+	

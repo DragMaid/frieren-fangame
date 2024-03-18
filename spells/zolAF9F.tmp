@@ -1,0 +1,23 @@
+extends Node2D
+
+@export var beam_scene : PackedScene
+var is_fired = false
+
+func _ready():
+	pass
+	
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		shoot_beam()
+
+func shoot_beam():
+	if not (is_fired):
+		is_fired = true
+		var beam = beam_scene.instantiate()
+		beam.position = self.position
+		self.add_child(beam)
+		beam.fire_beam(get_global_mouse_position())
+		
+func _process(delta):
+	pass
+

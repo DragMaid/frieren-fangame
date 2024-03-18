@@ -1,0 +1,17 @@
+extends Node2D
+
+@export var shield_scene : PackedScene
+func _ready():
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	#if Input.is_action_just_pressed("left_mouse_click"):
+		#var des = get_local_mouse_position()
+		#var angle = atan ((des.y - $Frieren.position.y) / (des.x - $Frieren.position.x)) 
+		#var shield = shield_scene.instantiate()
+		#shield.rotation = angle
+		#shield.position = des
+		#add_child(shield)
+	pass
+

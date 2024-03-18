@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cqjg8flaiop05"
+path="res://.godot/imported/Frieren Magic Sound Effect [Frieren Beyond the Journey's End].mp3-5cb6fa84bb4b1df7f1220037f49fd328.mp3str"
+
+[deps]
+
+source_file="res://audio/Frieren Magic Sound Effect [Frieren Beyond the Journey's End].mp3"
+dest_files=["res://.godot/imported/Frieren Magic Sound Effect [Frieren Beyond the Journey's End].mp3-5cb6fa84bb4b1df7f1220037f49fd328.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

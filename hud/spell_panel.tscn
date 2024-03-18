@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5k3rfs0l0gyd"]
+
+[ext_resource type="Texture2D" uid="uid://4ry27pugknl" path="res://sprite/icons/zoltraak-icon.png" id="1_crx20"]
+
+[sub_resource type="Theme" id="Theme_x8j2e"]
+
+[node name="spell_panel" type="CanvasLayer"]
+
+[node name="spell_ui" type="TextureRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = -111.0
+offset_right = 114.0
+offset_bottom = -24.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = SubResource("Theme_x8j2e")
+texture = ExtResource("1_crx20")

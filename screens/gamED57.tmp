@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://drrkmjw40ec30"]
+
+[ext_resource type="Script" path="res://screens/game_screen.gd" id="1_5qvvp"]
+[ext_resource type="PackedScene" uid="uid://dogka81w3tyqg" path="res://player/shield.tscn" id="2_t7j2s"]
+[ext_resource type="PackedScene" uid="uid://lxd7pv0k5r58" path="res://spells/beam.tscn" id="3_oct6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bgbg"]
+size = Vector2(1150.5, 121)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nagfn"]
+size = Vector2(79, 248)
+
+[node name="game_screen" type="Node2D"]
+script = ExtResource("1_5qvvp")
+shield_scene = ExtResource("2_t7j2s")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(574.25, 587.5)
+shape = SubResource("RectangleShape2D_1bgbg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(848, 377)
+shape = SubResource("RectangleShape2D_nagfn")
+
+[node name="Panel" type="Panel" parent="."]
+offset_top = 528.0
+offset_right = 1150.0
+offset_bottom = 650.0
+
+[node name="beam" parent="." instance=ExtResource("3_oct6t")]
+position = Vector2(469, 406)

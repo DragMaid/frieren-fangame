@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dogka81w3tyqg"]
+
+[ext_resource type="Script" path="res://spells/shield.gd" id="1_yf74y"]
+[ext_resource type="AudioStream" uid="uid://bbqqm0ll5f4ls" path="res://audio/shield.mp3" id="2_jy73w"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y7t4m"]
+load_path = "res://.godot/imported/shield.png-6fb920b45eef474254960042c5ce2427.ctex"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0nub"]
+radius = 11.0
+height = 28.0
+
+[node name="shield" type="Node2D"]
+script = ExtResource("1_yf74y")
+
+[node name="Shield" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, -0.999998)
+scale = Vector2(2.5625, 2.5625)
+texture = SubResource("CompressedTexture2D_y7t4m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, 2)
+shape = SubResource("CapsuleShape2D_a0nub")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="shield_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_jy73w")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

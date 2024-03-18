@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://or6hnoqwv6y"]
+
+[ext_resource type="Script" path="res://spells/zoltraak.gd" id="1_vs7oj"]
+[ext_resource type="PackedScene" uid="uid://lxd7pv0k5r58" path="res://spells/beam.tscn" id="2_l0hsd"]
+[ext_resource type="Texture2D" uid="uid://dcmo42wreefg5" path="res://sprite/spells/zoltraak/magic_circle.png" id="2_m7r12"]
+
+[node name="zoltraak" type="Node2D"]
+position = Vector2(-0.283539, 0.166656)
+script = ExtResource("1_vs7oj")
+beam_scene = ExtResource("2_l0hsd")
+
+[node name="MagicCircle" type="Sprite2D" parent="."]
+position = Vector2(0.283539, -1.16666)
+scale = Vector2(3.0625, 4.0625)
+texture = ExtResource("2_m7r12")
